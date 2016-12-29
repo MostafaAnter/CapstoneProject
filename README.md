@@ -1,4 +1,4 @@
-##M-Articles
+##M-Articles<img src="https://github.com/MostafaAnter/CapstoneProject/blob/master/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"> 
 
 Description 
 
