@@ -7,13 +7,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mostafa_anter.capstoneproject.R;
-import com.mostafa_anter.capstoneproject.util.AnimateView;
 import com.mostafa_anter.capstoneproject.util.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SplashActivity extends AppCompatActivity implements AnimateView {
+public class SplashActivity extends AppCompatActivity implements Util.AnimateView {
 
     @BindView(R.id.text_container)
     LinearLayout linearLayout;

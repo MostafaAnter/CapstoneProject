@@ -13,6 +13,11 @@ import android.widget.TextView;
 
 public class Util {
 
+    // when use animate view function you must implement this interface
+    public interface AnimateView {
+        public void onAnimationEnd();
+    }
+
     /**
      *
      * @param mContext current context
