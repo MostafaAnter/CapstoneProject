@@ -1,4 +1,5 @@
-M-News
+##M-Articles
+
 Description 
 
 The M-News app brings you the latest English news reading experience on the go and keeps you informed on happenings from anywhere and around the World, greater personalisation and better overall performance. So you can get more of the news that matters to you.
