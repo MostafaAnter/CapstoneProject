@@ -10,10 +10,13 @@ Every one that interested in reading articles&news.
 
 Features
 
- -Read the best articles from multi correspondents
- -Push notifications for breaking news stories
- -Improved offline experience. Download the latest stories when you have a signal and then read them at your leisure 
- -Share stories to your social networks, or email/SMS to a friend
+-Read the best articles from multi correspondents
+ 
+-Push notifications for breaking news stories
+
+-Improved offline experience. Download the latest stories when you have a signal and then read them at your leisure 
+
+-Share stories to your social networks, or email/SMS to a friend
 
 
 User Interface Mocks
