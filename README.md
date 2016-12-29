@@ -2,19 +2,28 @@
 
 Description 
 
-The M-News app brings you the latest English news reading experience on the go and keeps you informed on happenings from anywhere and around the World, greater personalisation and better overall performance. So you can get more of the news that matters to you.
+The M-Articles app brings you the latest English articles reading experience on the go and keeps you informed on happenings from anywhere and around the World, greater personalisation and better overall performance. So you can get more of the articles that matters to you.
 
 Intended User
 
-Every one that interested in reading news.
+Every one that interested in reading articles&news.
 
 Features
 
-Read the best journalism from multi correspondents
-Push notifications for breaking news stories
-Improved offline experience. Download the latest stories when you have a signal and then read them at your leisure 
-Share stories to your social networks, or email/SMS to a friend
+-Read the best articles from multi correspondents
+-Push notifications for breaking news stories
+-Improved offline experience. Download the latest stories when you have a signal and then read them at your leisure 
+-Share stories to your social networks, or email/SMS to a friend
+
+
 User Interface Mocks
+
+Screen 1
+
+<img style="position: center;" src="https://github.com/MostafaAnter/CapstoneProject/blob/master/art/device-2016-12-29-233533.png" width="250">
+
+Matrial Splash screen that animate text then end and start main activity that contain all articles
+
 Screen 1
  
 
