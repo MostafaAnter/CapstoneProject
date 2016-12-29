@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity implements AnimateView {
     @Override
     public void onAnimationEnd() {
         // do some thing
-//        startActivity(new Intent(SplashActivity.this, MainActivity.class)
-//        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        startActivity(new Intent(SplashActivity.this, MainActivity.class)
+        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));
     }
 }
