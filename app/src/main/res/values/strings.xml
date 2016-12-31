@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">M-Articles</string>
     <string name="app_description">live articles around the World</string>
+    <string name="content_authority">com.mostafa_anter.capstoneproject.app</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
