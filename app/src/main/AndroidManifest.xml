@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mostafa_anter.capstoneproject">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.Manifest.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,11 +33,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mostafa_anter.capstoneproject.ui.activity.MainActivity" />
         </activity>
+
+        <service
+            android:name=".sync.QuoteIntentService"
+            android:exported="false" />
         <provider
             android:authorities="@string/content_authority"
             android:name=".data.ArticlesProvider"
             android:exported="false"
             android:syncable="true"/>
+        <service
+            android:name=".sync.QuoteJobService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
     </application>
 
 </manifest>

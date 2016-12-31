@@ -1,5 +1,6 @@
 package com.mostafa_anter.capstoneproject.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import butterknife.ButterKnife;
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHolder> {
     private static final String TAG = "ArticleAdapter";
 
+    private Context mContext;
     private List<Article> mDataSet;
 
     /**
@@ -46,7 +48,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
      *
      * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
      */
-    public ArticleAdapter(List<Article> dataSet) {
+    public ArticleAdapter(Context mContext, List<Article> dataSet) {
+        this.mContext = mContext;
         mDataSet = dataSet;
     }
 

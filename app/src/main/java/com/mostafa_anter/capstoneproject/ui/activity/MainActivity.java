@@ -1,27 +1,65 @@
 package com.mostafa_anter.capstoneproject.ui.activity;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mostafa_anter.capstoneproject.R;
 import com.mostafa_anter.capstoneproject.R2;
+import com.mostafa_anter.capstoneproject.adapter.ArticleAdapter;
+import com.mostafa_anter.capstoneproject.data.ArticlesContract;
 import com.mostafa_anter.capstoneproject.data.MArticlesPrefStore;
+import com.mostafa_anter.capstoneproject.model.Article;
+import com.mostafa_anter.capstoneproject.sync.QuoteSyncJob;
 import com.mostafa_anter.capstoneproject.util.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements LoaderManager.LoaderCallbacks<Cursor>,
+        NavigationView.OnNavigationItemSelectedListener,
+        SwipeRefreshLayout.OnRefreshListener {
+
     @BindView(R2.id.toolbar)Toolbar toolbar;
     private TextView toolbarSubtitle;
+
+    @BindView(R2.id.recyclerView)
+    RecyclerView mRecyclerView;
+    @BindView(R2.id.swipeRefresh)
+    SwipeRefreshLayout mSwipeRefresh;
+
+    @BindView(R2.id.noData)
+    LinearLayout noDataView;
+
+
+    protected ArticleAdapter mAdapter;
+    protected StaggeredGridLayoutManager sglm;
+    protected List<Article> mDataSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +67,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        // manipulate toolbar
-        Util.manipulateToolbar(this, toolbar, 0, null, true);
-        TextView toolbarTitle = (TextView) toolbar.findViewById(R.id.title);
-        toolbarSubtitle = (TextView) toolbar.findViewById(R.id.subtitle);
-        Util.changeViewTypeFace(this, "Righteous-Regular.ttf", toolbarTitle);
-        toolbarTitle.setText(getString(R.string.app_name));
-        toolbarSubtitle.setText(new MArticlesPrefStore(this)
-                .getSourceName(new MArticlesPrefStore(this)
-                        .getSourceValue()));
+        manipulateToolbar();
+        setRecyclerViewAndSwipe();
+        onRefresh();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -47,6 +79,40 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        QuoteSyncJob.initialize(this);
+        getSupportLoaderManager().initLoader(0, null, this);
+    }
+
+    private void setRecyclerViewAndSwipe() {
+        // manipulateRecyclerView & Swipe to refresh
+        mDataSet = new ArrayList<>();
+        sglm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(sglm);
+        mAdapter = new ArticleAdapter(this, mDataSet);
+        // Set CustomAdapter as the adapter for RecyclerView.
+        mRecyclerView.setAdapter(mAdapter);
+        //noinspection ResourceAsColor
+        mSwipeRefresh.setColorScheme(
+                R.color.swipe_color_1, R.color.swipe_color_2,
+                R.color.swipe_color_3, R.color.swipe_color_4);
+        mSwipeRefresh.setProgressViewOffset(false, 0,
+                (int) TypedValue.applyDimension(
+                        TypedValue.COMPLEX_UNIT_DIP,
+                        24,
+                        getResources().getDisplayMetrics()));
+    }
+
+    private void manipulateToolbar() {
+        // manipulate toolbar
+        Util.manipulateToolbar(this, toolbar, 0, null, true);
+        TextView toolbarTitle = (TextView) toolbar.findViewById(R.id.title);
+        toolbarSubtitle = (TextView) toolbar.findViewById(R.id.subtitle);
+        Util.changeViewTypeFace(this, "Righteous-Regular.ttf", toolbarTitle);
+        toolbarTitle.setText(getString(R.string.app_name));
+        toolbarSubtitle.setText(new MArticlesPrefStore(this)
+                .getSourceName(new MArticlesPrefStore(this)
+                        .getSourceValue()));
     }
 
     @Override
@@ -109,5 +175,43 @@ public class MainActivity extends AppCompatActivity
         new MArticlesPrefStore(this).addSourceValue(sourceValue);
         new MArticlesPrefStore(this).addSourceName(sourceValue, sourceName);
         toolbarSubtitle.setText(new MArticlesPrefStore(this).getSourceName(sourceValue));
+    }
+
+    private boolean networkUp() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnectedOrConnecting();
+    }
+
+    @Override
+    public void onRefresh() {
+        QuoteSyncJob.syncImmediately(this);
+
+        if (!networkUp() && mAdapter.getItemCount() == 0) {
+            mSwipeRefresh.setRefreshing(false);
+            noDataView.setVisibility(View.VISIBLE);
+        } else if (!networkUp()) {
+            mSwipeRefresh.setRefreshing(false);
+            Toast.makeText(this, R.string.toast_no_connectivity, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(this,
+                ArticlesContract.ArticleEntry.CONTENT_URI,
+                ArticlesContract.ArticleEntry.ARTICLE_COLUMNS,
+                null, null, ArticlesContract.ArticleEntry.DEFAULT_SORT);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
     }
 }

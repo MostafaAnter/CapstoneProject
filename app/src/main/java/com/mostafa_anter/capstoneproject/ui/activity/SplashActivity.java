@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mostafa_anter.capstoneproject.R;
+import com.mostafa_anter.capstoneproject.R2;
 import com.mostafa_anter.capstoneproject.util.Util;
 
 import butterknife.BindView;
@@ -14,9 +15,9 @@ import butterknife.ButterKnife;
 
 public class SplashActivity extends AppCompatActivity implements Util.AnimateView {
 
-    @BindView(R.id.text_container)
+    @BindView(R2.id.text_container)
     LinearLayout linearLayout;
-    @BindView(R.id.app_name)
+    @BindView(R2.id.app_name)
     TextView appName;
 
     @Override

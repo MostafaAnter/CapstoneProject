@@ -132,4 +132,6 @@
 
     <string name="techcrunch_name">TechCrunch</string>
     <string name="techcrunch_source">techcrunch</string>
+    <string name="there_is_no_data">There is no data!</string>
+    <string name="toast_no_connectivity">no internet connection!</string>
 </resources>

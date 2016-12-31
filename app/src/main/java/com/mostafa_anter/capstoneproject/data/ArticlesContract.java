@@ -26,6 +26,18 @@ public class ArticlesContract{
 		public static final String COLUMN_SOURCE = "source";
 		public static final String COLUMN_VERSION_NAME = "version_name";
 
+		public static final String DEFAULT_SORT = COLUMN_PUBLISHEDAT + " DESC";
+		public static final String[] ARTICLE_COLUMNS = {
+				_ID,
+				COLUMN_AUTHOR,
+				COLUMN_TITLE,
+				COLUMN_DESCRIPTION,
+				COLUMN_URL,
+				COLUMN_URLTOIMAGE,
+				COLUMN_PUBLISHEDAT,
+				COLUMN_SOURCE
+		};
+
 
 		// create content uri
 		public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon()
