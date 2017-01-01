@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -15,8 +16,13 @@ import android.widget.TextView;
 import com.mostafa_anter.capstoneproject.data.ArticlesContract;
 import com.mostafa_anter.capstoneproject.model.Article;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Created by mostafa_anter on 12/29/16.
@@ -130,4 +136,29 @@ public class Util {
 
         return rowItemList;
     }
+
+    // convert date to nice format as 19 hours ago
+    public static String manipulateDateFormat(String post_date){
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        TimeZone utcZone = TimeZone.getTimeZone("UTC");
+        formatter.setTimeZone(utcZone);
+        Date date = null;
+        try {
+            date = formatter.parse(post_date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (date != null) {
+            // Converting timestamp into x ago format
+            CharSequence timeAgo = DateUtils.getRelativeTimeSpanString(
+                    Long.parseLong(String.valueOf(date.getTime())),
+                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
+            return timeAgo + "";
+        }else {
+            return post_date;
+        }
+    }
+
 }

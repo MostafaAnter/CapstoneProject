@@ -25,6 +25,10 @@ android {
     }
 }
 
+repositories {
+    mavenCentral() // jcenter() works as well because it pulls from Maven Central
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -47,4 +51,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     // rx android
     compile 'io.reactivex:rxandroid:1.2.1'
+    // glid to download image
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.android.support:support-v4:19.1.0'
 }

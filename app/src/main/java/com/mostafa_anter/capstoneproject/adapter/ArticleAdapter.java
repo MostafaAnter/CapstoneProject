@@ -2,16 +2,23 @@ package com.mostafa_anter.capstoneproject.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.mostafa_anter.capstoneproject.R;
+import com.mostafa_anter.capstoneproject.R2;
 import com.mostafa_anter.capstoneproject.model.Article;
+import com.mostafa_anter.capstoneproject.util.Util;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -28,6 +35,22 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R2.id.article_title)TextView title;
+        @BindView(R2.id.article_subtitle)TextView subtitle;
+        @BindView(R2.id.thumbnail)ImageView thumbnail;
+
+        public TextView getTitle() {
+            return title;
+        }
+
+        public TextView getSubtitle() {
+            return subtitle;
+        }
+
+        public ImageView getThumbnail() {
+            return thumbnail;
+        }
 
         public ViewHolder(View v) {
             super(v);
@@ -67,6 +90,20 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Log.d(TAG, "Element " + position + " set.");
+
+        String title = mDataSet.get(position).getTitle().equalsIgnoreCase("null")? "":
+                mDataSet.get(position).getTitle();
+
+        viewHolder.getTitle().setText(title);
+        viewHolder.getSubtitle().setText(Util.manipulateDateFormat(mDataSet.get(position).getPublishedAt()));
+
+        // load thumbnail image :)
+        Glide.with(mContext)
+                .load(mDataSet.get(position).getUrlToImage())
+                .centerCrop()
+                .placeholder(R.color.divider)
+                .crossFade()
+                .into(viewHolder.getThumbnail());
 
     }
 
