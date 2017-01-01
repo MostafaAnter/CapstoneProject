@@ -210,11 +210,32 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mSwipeRefresh.setRefreshing(false);
+        if (data.getCount() != 0) {
+            noDataView.setVisibility(View.GONE);
+            // clear data set
+            clearDataSet();
+            mDataSet.addAll(Util.returnListFromCursor(data));
+            mAdapter.notifyDataSetChanged();
+
+        }else {
+            noDataView.setVisibility(View.VISIBLE);
+        }
 
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
+        mSwipeRefresh.setRefreshing(false);
+        // clear data set
+        clearDataSet();
+    }
 
+    // remove all item from RecyclerView
+    private void clearDataSet() {
+        if (mDataSet != null) {
+            mDataSet.clear();
+            mAdapter.notifyDataSetChanged();
+        }
     }
 }

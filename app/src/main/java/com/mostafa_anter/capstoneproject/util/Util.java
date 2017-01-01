@@ -1,6 +1,7 @@
 package com.mostafa_anter.capstoneproject.util;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,12 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+
+import com.mostafa_anter.capstoneproject.data.ArticlesContract;
+import com.mostafa_anter.capstoneproject.model.Article;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mostafa_anter on 12/29/16.
@@ -102,5 +109,25 @@ public class Util {
     public static void changeViewTypeFace(Context mContext, String fontPath, TextView view){
         Typeface font = Typeface.createFromAsset(mContext.getAssets(), fontPath);
         view.setTypeface(font);
+    }
+
+    public static List<Article> returnListFromCursor(Cursor cursor){
+        List<Article> rowItemList = new ArrayList<>();
+        if (cursor.getCount() != 0 && cursor.moveToFirst()){
+            do{
+                String author = cursor.getString(cursor.getColumnIndex(ArticlesContract.ArticleEntry.COLUMN_AUTHOR));
+                String title = cursor.getString(cursor.getColumnIndex(ArticlesContract.ArticleEntry.COLUMN_TITLE));
+                String description = cursor.getString(cursor.getColumnIndex(ArticlesContract.ArticleEntry.COLUMN_DESCRIPTION));
+                String url = cursor.getString(cursor.getColumnIndex(ArticlesContract.ArticleEntry.COLUMN_URL));
+                String urlToImage = cursor.getString(cursor.getColumnIndex(ArticlesContract.ArticleEntry.COLUMN_URLTOIMAGE));
+                String publishedAt = cursor.getString(cursor.getColumnIndex(ArticlesContract.ArticleEntry.COLUMN_PUBLISHEDAT));
+                String source = cursor.getString(cursor.getColumnIndex(ArticlesContract.ArticleEntry.COLUMN_SOURCE));
+                rowItemList.add(new Article(author, title, description, url, urlToImage, publishedAt, source));
+                // do what ever you want here
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+
+        return rowItemList;
     }
 }
