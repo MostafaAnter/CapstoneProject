@@ -178,6 +178,9 @@ public class MainActivity extends AppCompatActivity
         new MArticlesPrefStore(this).addSourceValue(sourceValue);
         new MArticlesPrefStore(this).addSourceName(sourceValue, sourceName);
         toolbarSubtitle.setText(new MArticlesPrefStore(this).getSourceName(sourceValue));
+
+        // load data :)
+        onRefresh();
     }
 
     private boolean networkUp() {
@@ -190,7 +193,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onRefresh() {
         QuoteSyncJob.syncImmediately(this);
-
+        if (!mSwipeRefresh.isRefreshing()){
+            mSwipeRefresh.setRefreshing(true);
+        }
         if (!networkUp() && mAdapter.getItemCount() == 0) {
             mSwipeRefresh.setRefreshing(false);
             noDataView.setVisibility(View.VISIBLE);

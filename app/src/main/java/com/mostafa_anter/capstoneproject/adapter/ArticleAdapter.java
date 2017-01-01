@@ -101,6 +101,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         // load thumbnail image :)
         Glide.with(mContext)
                 .load(mDataSet.get(position).getUrlToImage())
+                .thumbnail(0.1f)
                 .crossFade()
                 .into(viewHolder.getThumbnail());
         viewHolder.getThumbnail().setAspectRatio(1f + (new Random().nextFloat()));
