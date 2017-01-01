@@ -1,15 +1,13 @@
 package com.mostafa_anter.capstoneproject.ui.activity;
 
 import android.content.Context;
+import android.content.CursorLoader;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -41,7 +39,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
-        implements LoaderManager.LoaderCallbacks<Cursor>,
+        implements android.app.LoaderManager.LoaderCallbacks<Cursor>,
         NavigationView.OnNavigationItemSelectedListener,
         SwipeRefreshLayout.OnRefreshListener {
 
@@ -81,7 +79,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         QuoteSyncJob.initialize(this);
-        getSupportLoaderManager().initLoader(0, null, this);
+        getLoaderManager().initLoader(0, null, this);
     }
 
     private void setRecyclerViewAndSwipe() {
@@ -181,6 +179,8 @@ public class MainActivity extends AppCompatActivity
 
         // load data :)
         onRefresh();
+
+        getLoaderManager().restartLoader(0, null, this);
     }
 
     private boolean networkUp() {
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    public android.content.Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         String selection = ArticlesContract.ArticleEntry.COLUMN_SOURCE + "=?";
         String[] selectionArgs = {new MArticlesPrefStore(this).getSourceValue()};
 
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor data) {
         mSwipeRefresh.setRefreshing(false);
         if (data.getCount() != 0) {
             noDataView.setVisibility(View.GONE);
@@ -230,11 +230,10 @@ public class MainActivity extends AppCompatActivity
         }else {
             noDataView.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(android.content.Loader<Cursor> loader) {
         mSwipeRefresh.setRefreshing(false);
         // clear data set
         clearDataSet();

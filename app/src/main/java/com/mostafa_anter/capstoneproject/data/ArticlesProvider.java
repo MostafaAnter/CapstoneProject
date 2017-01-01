@@ -72,6 +72,9 @@ public class ArticlesProvider extends ContentProvider{
 						null,
 						null,
 						sortOrder);
+				if (retCursor != null) {
+					retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+				}
 				return retCursor;
 			}
 			// Individual flavor based on Id selected
@@ -84,6 +87,9 @@ public class ArticlesProvider extends ContentProvider{
 						null,
 						null,
 						sortOrder);
+				if (retCursor != null) {
+					retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+				}
 				return retCursor;
 			}
 			default:{
@@ -144,6 +150,7 @@ public class ArticlesProvider extends ContentProvider{
 				throw new UnsupportedOperationException("Unknown uri: " + uri);
 		}
 
+		getContext().getContentResolver().notifyChange(uri, null);
 		return numDeleted;
 	}
 

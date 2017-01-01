@@ -40,8 +40,7 @@
         <provider
             android:authorities="@string/content_authority"
             android:name=".data.ArticlesProvider"
-            android:exported="false"
-            android:syncable="true"/>
+            android:exported="false" />
         <service
             android:name=".sync.QuoteJobService"
             android:enabled="true"

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.mostafa_anter.capstoneproject.R;
 import com.mostafa_anter.capstoneproject.R2;
 import com.mostafa_anter.capstoneproject.model.Article;
@@ -102,6 +103,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         Glide.with(mContext)
                 .load(mDataSet.get(position).getUrlToImage())
                 .thumbnail(0.1f)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .crossFade()
                 .into(viewHolder.getThumbnail());
         viewHolder.getThumbnail().setAspectRatio(1f + (new Random().nextFloat()));
