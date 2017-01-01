@@ -3,6 +3,7 @@ package com.mostafa_anter.capstoneproject.sync;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -10,13 +11,14 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.mostafa_anter.capstoneproject.BuildConfig;
+import com.mostafa_anter.capstoneproject.data.ArticlesContract;
 import com.mostafa_anter.capstoneproject.data.MArticlesPrefStore;
 import com.mostafa_anter.capstoneproject.model.Article;
 import com.mostafa_anter.capstoneproject.model.NewsResponse;
 import com.mostafa_anter.capstoneproject.rest.ApiClient;
 import com.mostafa_anter.capstoneproject.rest.ApiInterface;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -37,7 +39,7 @@ public final class QuoteSyncJob {
     private QuoteSyncJob() {
     }
 
-    static void getQuotes(Context context) {
+    static void getQuotes(final Context context) {
 
         // detach an observer from its observable while the observable is still emitting data
         if (subscription != null) subscription.unsubscribe();
@@ -66,16 +68,36 @@ public final class QuoteSyncJob {
                     @Override
                     public void onNext(NewsResponse response) {
                         Log.d("article result", response.getSource());
+                        ArrayList<ContentValues> contentValuesArrayList = new ArrayList<>();
+                        ContentValues contentValues;
+
                         for (Article article: response.getArticles()) {
                             article.setSource(response.getSource());
+                            contentValues = new ContentValues();
+                            contentValues.put(ArticlesContract.ArticleEntry.COLUMN_AUTHOR, article.getAuthor());
+                            contentValues.put(ArticlesContract.ArticleEntry.COLUMN_DESCRIPTION, article.getDescription());
+                            contentValues.put(ArticlesContract.ArticleEntry.COLUMN_PUBLISHEDAT, article.getPublishedAt());
+                            contentValues.put(ArticlesContract.ArticleEntry.COLUMN_SOURCE, article.getSource());
+                            contentValues.put(ArticlesContract.ArticleEntry.COLUMN_TITLE, article.getTitle());
+                            contentValues.put(ArticlesContract.ArticleEntry.COLUMN_URL, article.getUrl());
+                            contentValues.put(ArticlesContract.ArticleEntry.COLUMN_URLTOIMAGE, article.getUrlToImage());
+                            contentValuesArrayList.add(contentValues);
                         }
-                        Log.d("article result", response.toString());
+
+                        String selection = ArticlesContract.ArticleEntry.COLUMN_SOURCE + "=?";
+                        String[] selectionArgs = {new MArticlesPrefStore(context).getSourceValue()};
+
+                        // delete old data
+                        context.getContentResolver().delete(ArticlesContract.ArticleEntry.CONTENT_URI,
+                                selection, selectionArgs);
+                        // add new data
+                        context.getContentResolver().bulkInsert(ArticlesContract.ArticleEntry.CONTENT_URI,
+                                contentValuesArrayList.toArray(new ContentValues[contentValuesArrayList.size()]));
+                        Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
+                        context.sendBroadcast(dataUpdatedIntent);
+
                     }
                 });
-
-
-        Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
-        context.sendBroadcast(dataUpdatedIntent);
     }
 
     private static void schedulePeriodic(Context context) {
