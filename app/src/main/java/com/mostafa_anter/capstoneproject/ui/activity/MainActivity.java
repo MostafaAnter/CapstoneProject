@@ -199,10 +199,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        String selection = ArticlesContract.ArticleEntry.COLUMN_SOURCE + "=?";
+        String[] selectionArgs = {new MArticlesPrefStore(this).getSourceValue()};
+
         return new CursorLoader(this,
                 ArticlesContract.ArticleEntry.CONTENT_URI,
                 ArticlesContract.ArticleEntry.ARTICLE_COLUMNS,
-                null, null, ArticlesContract.ArticleEntry.DEFAULT_SORT);
+                selection, selectionArgs, ArticlesContract.ArticleEntry.DEFAULT_SORT);
     }
 
     @Override
