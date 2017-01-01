@@ -132,7 +132,6 @@ public class Util {
                 // do what ever you want here
             }while(cursor.moveToNext());
         }
-        cursor.close();
 
         return rowItemList;
     }
