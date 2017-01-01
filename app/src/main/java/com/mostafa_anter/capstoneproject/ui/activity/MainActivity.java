@@ -194,6 +194,7 @@ public class MainActivity extends AppCompatActivity
         if (!networkUp() && mAdapter.getItemCount() == 0) {
             mSwipeRefresh.setRefreshing(false);
             noDataView.setVisibility(View.VISIBLE);
+            Toast.makeText(this, R.string.toast_no_connectivity, Toast.LENGTH_LONG).show();
         } else if (!networkUp()) {
             mSwipeRefresh.setRefreshing(false);
             Toast.makeText(this, R.string.toast_no_connectivity, Toast.LENGTH_LONG).show();
