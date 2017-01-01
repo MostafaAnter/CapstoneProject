@@ -101,6 +101,9 @@ public class MainActivity extends AppCompatActivity
                         TypedValue.COMPLEX_UNIT_DIP,
                         24,
                         getResources().getDisplayMetrics()));
+
+        mSwipeRefresh.setOnRefreshListener(this);
+        mSwipeRefresh.setRefreshing(true);
     }
 
     private void manipulateToolbar() {
