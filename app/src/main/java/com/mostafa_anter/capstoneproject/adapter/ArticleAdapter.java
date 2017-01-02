@@ -1,6 +1,7 @@
 package com.mostafa_anter.capstoneproject.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.mostafa_anter.capstoneproject.R;
 import com.mostafa_anter.capstoneproject.R2;
 import com.mostafa_anter.capstoneproject.model.Article;
+import com.mostafa_anter.capstoneproject.ui.activity.DetailActivity;
 import com.mostafa_anter.capstoneproject.ui.views.DynamicHeightNetworkImageView;
 import com.mostafa_anter.capstoneproject.util.Util;
 
@@ -36,7 +38,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R2.id.article_title)TextView title;
         @BindView(R2.id.article_subtitle)TextView subtitle;
@@ -62,6 +64,9 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
+                    Intent intent = new Intent(mContext, DetailActivity.class);
+                    intent.putExtra("item_data", getPosition());
+                    mContext.startActivity(intent);
                 }
             });
         }
