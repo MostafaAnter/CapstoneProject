@@ -137,27 +137,28 @@ public class Util {
     }
 
     // convert date to nice format as 19 hours ago
-//    public static String manipulateDateFormat(String post_date){
-//
-//        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        TimeZone utcZone = TimeZone.getTimeZone("UTC");
-//        formatter.setTimeZone(utcZone);
-//        Date date = null;
-//        try {
-//            date = formatter.parse(post_date);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        if (date != null) {
-//            // Converting timestamp into x ago format
-//            CharSequence timeAgo = DateUtils.getRelativeTimeSpanString(
-//                    Long.parseLong(String.valueOf(date.getTime())),
-//                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
-//            return timeAgo + "";
-//        }else {
-//            return post_date;
-//        }
-//    }
+    public static String manipulateDateFormat(String post_date){
+
+        SimpleDateFormat existingUTCFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        //SimpleDateFormat requiredFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+
+        Date date = null;
+        try {
+            date = existingUTCFormat.parse(post_date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (date != null) {
+            // Converting timestamp into x ago format
+            CharSequence timeAgo = DateUtils.getRelativeTimeSpanString(
+                    Long.parseLong(String.valueOf(date.getTime())),
+                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
+            return timeAgo + "";
+        }else {
+            return post_date;
+        }
+    }
 
 }

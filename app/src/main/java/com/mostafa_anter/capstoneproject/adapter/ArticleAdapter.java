@@ -97,7 +97,17 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
                 mDataSet.get(position).getTitle();
 
         viewHolder.getTitle().setText(title);
-        //viewHolder.getSubtitle().setText(Util.manipulateDateFormat(mDataSet.get(position).getPublishedAt()));
+
+        String author = "";
+        if (mDataSet.get(position) != null && mDataSet.get(position).getAuthor() != null) {
+            author = mDataSet.get(position).getAuthor().equalsIgnoreCase("null")?"":
+                    mDataSet.get(position).getAuthor();
+            author = author.isEmpty()? "" : " by " + author;
+        }
+        if (mDataSet.get(position) != null && mDataSet.get(position).getPublishedAt() != null &&
+                !mDataSet.get(position).getPublishedAt().equalsIgnoreCase("null"))
+        viewHolder.getSubtitle().setText(Util.manipulateDateFormat(mDataSet.get(position).getPublishedAt()) +
+        author);
 
         // load thumbnail image :)
         Glide.with(mContext)
