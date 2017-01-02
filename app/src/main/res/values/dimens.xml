@@ -8,4 +8,8 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+
+    <!-- for widget -->
+    <dimen name="min_widget_width">250dp</dimen>
+    <dimen name="min_widget_list_height">180dp</dimen>
 </resources>
