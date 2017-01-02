@@ -51,6 +51,8 @@
     long producerNode;
     long consumerNode;
 }
+-dontwarn okio.**
+-dontwarn rx.**
 ##---------------End: proguard configuration for Reactivex android  ----------
 ##---------------Start: proguard configuration for Glide  ----------
 -keep public class * implements com.bumptech.glide.module.GlideModule
