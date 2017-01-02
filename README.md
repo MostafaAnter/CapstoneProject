@@ -23,17 +23,30 @@ Screen 1
 
 Matrial Splash screen that animate text then end and start main activity that contain all articles
 
-Screen 1
- 
+
+Screen 2
+
+<img style="position: center;" src="https://github.com/MostafaAnter/CapstoneProject/blob/master/art/device-2017-01-02-160643.png" width="250">
+
+Just select source of articles from awesome navigation drawer then you will see magic :)
+
+
+Screen 3
+
+<img style="position: center;" src="https://github.com/MostafaAnter/CapstoneProject/blob/master/art/device-2017-01-02-160548.png" width="250">
 
 Get the latest Headlines, World News, International Headlines, Global Finance, Sports, NFL, Entertainment, Politics, Technology, Celebrity News - Over 1 million personalized topics in a lightning-fast, material design interface. Just select category from navigation drawer . 
 
-Screen 2
+Screen 4
+
+<img style="position: center;" src="https://github.com/MostafaAnter/CapstoneProject/blob/master/art/device-2017-01-02-160618.png" width="250">
 
 Read news full details and share stories to your social networks, or email/SMS to a friend.
 
 
-Screen 3
+Screen 5
+
+<img style="position: center;" src="https://github.com/MostafaAnter/CapstoneProject/blob/master/art/device-2017-01-02-160857.png" width="250">
 
 Widget to provide relevant information to the user on the home screen.
 
