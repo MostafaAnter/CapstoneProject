@@ -50,39 +50,42 @@ Screen 5
 
 Widget to provide relevant information to the user on the home screen.
 
-Key Considerations
-How will your app handle data persistence? 
+##Key Considerations
+
+#How will your app handle data persistence? 
 
 All the data in the application is sore in a local repository using SQlite. A content provider will be use to connect the local repository with main application. Main entity is news item.
-Describe any corner cases in the UX.
+
+#Describe any corner cases in the UX.
 
 A widget will provide news information to users, when use tab on the widget it will open the application will open detail activity to show user all information and allow user to share news detail with his friends.
 
-Describe any libraries you’ll be using and share your reasoning for including them.
+#Describe any libraries you’ll be using and share your reasoning for including them.
 
 Retrofit :  to make the http calls.
 Butterknife : simply to reduce boilerplate code in my application by inject views (or setting click listeners).
 
-Describe how you will implement Google Play Services.
+#Describe how you will implement Google Play Services.
 
 Google Ads by integrate the Firebase libraries with adMob id.
 
-Required Tasks
-Task 1: Project Setup
+##Required Tasks
 
-Design  all system functions and Implement mvp pattern  
-Design contract of SQlite database
-Write content provider
-Implement SyncAdapter to update data
-Task 2: Implement UI for Each Activity and Fragment
+#Task 1: Project Setup
+- Design  all system functions and Implement mvp pattern  
+- Design contract of SQlite database
+- Write content provider
+- Implement SyncAdapter to update data
 
-Build UI for MainActivity
-Build UI for Detail Activity  
-Task 3: Implement Google Ads
-Create new app on AdMob to get id 
-Integrate Firebase libraries with my app.
+#Task 2: Implement UI for Each Activity and Fragment
+- Build UI for MainActivity
+- Build UI for Detail Activity  
 
-Task 4: Create widget to display last news to user
-Create collection widget that display list of news.
+#Task 3: Implement Google Ads
+- Create new app on AdMob to get id 
+- Integrate Firebase libraries with my app.
+
+#Task 4: Create widget to display last news to user
+- Create collection widget that display list of news.
 
 
