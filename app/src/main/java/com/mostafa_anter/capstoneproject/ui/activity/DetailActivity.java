@@ -32,6 +32,7 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+        // manipulate ads
         MobileAds.initialize(getApplicationContext(), getString(R.string.banner_ad_unit_id));
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
