@@ -58,5 +58,7 @@
   **[] $VALUES;
   public *;
 }
--keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 ##---------------End: proguard configuration for Glide  ----------
+# for google gms
+-keep class com.google.android.gms.** { *; }
+-dontwarn com.google.android.gms.**

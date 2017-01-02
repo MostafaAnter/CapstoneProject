@@ -32,6 +32,7 @@ public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.article_title)TextView title;
     @BindView(R.id.article_byline)TextView byline;
     @BindView(R.id.article_body)TextView body;
+    @BindView(R.id.adView)AdView mAdView;
 
     private Article article;
 
@@ -65,8 +66,6 @@ public class DetailActivity extends AppCompatActivity {
 
         // manipulate ads
         MobileAds.initialize(getApplicationContext(), getString(R.string.banner_ad_unit_id));
-
-        AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
