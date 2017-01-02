@@ -99,6 +99,7 @@ public class Util {
         /*
         * hide title
         * */
+            if (mContext.getSupportActionBar() != null)
             mContext.getSupportActionBar().setDisplayShowTitleEnabled(false);
             //toolbar.setNavigationIcon(R.drawable.ic_toolbar);
             toolbar.setTitle("");

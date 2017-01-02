@@ -65,7 +65,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
                 public void onClick(View v) {
                     Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
                     Intent intent = new Intent(mContext, DetailActivity.class);
-                    intent.putExtra("item_data", getPosition());
+                    intent.putExtra("item_data", mDataSet.get(getPosition()));
                     mContext.startActivity(intent);
                 }
             });
