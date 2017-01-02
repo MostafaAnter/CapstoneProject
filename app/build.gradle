@@ -20,6 +20,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.config
     }
     buildTypes {
         all {
@@ -30,6 +31,8 @@ android {
     }
     buildTypes.each {
         it.buildConfigField('String', 'API_KEY', '"5609333347eb4e03bf21818493b205ba"')
+    }
+    productFlavors {
     }
 }
 
