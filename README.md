@@ -91,3 +91,6 @@ Google Ads by integrate the Firebase libraries with adMob id.
 - Create collection widget that display list of news.
 
 
+you can find it on [Google Play!](https://goo.gl/khl4ad)
+
+
