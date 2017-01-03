@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "317302831916-q7j3p122bkp6qp017b1ine8hh51nvvsm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mostafa_anter.capstoneproject",
+            "certificate_hash": "59B9DE2FF6D44262E7EB95B85D7DF49ABD1DEE0D"
+          }
+        },
+        {
           "client_id": "317302831916-pe4l8lvuk64u6tafd1nloqkpm9n24pg8.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "317302831916-pe4l8lvuk64u6tafd1nloqkpm9n24pg8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
