@@ -7,7 +7,7 @@ android {
         config {
             keyAlias 'm-articles'
             keyPassword '3nterrr@'
-            storeFile file('$rootdir/key.jks')
+            storeFile file('../key.jks')
             storePassword '3nterrr@'
         }
     }
@@ -26,6 +26,9 @@ android {
         all {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.config
         }
     }
     buildTypes.each {
