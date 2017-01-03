@@ -7,7 +7,7 @@ android {
         config {
             keyAlias 'm-articles'
             keyPassword '3nterrr@'
-            storeFile file('/home/mostafa_anter/StudioProjects/CapstoneProject/app/key.jks')
+            storeFile file('$rootdir/key.jks')
             storePassword '3nterrr@'
         }
     }
@@ -24,8 +24,7 @@ android {
     }
     buildTypes {
         all {
-            shrinkResources true
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
