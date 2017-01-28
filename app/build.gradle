@@ -17,8 +17,8 @@ android {
         applicationId "com.mostafa_anter.capstoneproject"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 2
-        versionName "2.0"
+        versionCode 3
+        versionName "2.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.config
     }
@@ -66,7 +66,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     // glid to download image
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.android.support:support-v4:19.1.0'
+    compile 'com.android.support:support-v4:25.1.0'
     // google ads
     compile 'com.google.firebase:firebase-ads:10.0.1'
 }

@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView.OnNavigationItemSelectedListener,
         SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R2.id.toolbar)Toolbar toolbar;
+    @BindView(R2.id.toolbar)
+    Toolbar toolbar;
     private TextView toolbarSubtitle;
 
     @BindView(R2.id.recyclerView)
@@ -172,7 +173,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void navigationItemAction(String sourceName, String sourceValue){
+    private void navigationItemAction(String sourceName, String sourceValue) {
         new MArticlesPrefStore(this).addSourceValue(sourceValue);
         new MArticlesPrefStore(this).addSourceName(sourceValue, sourceName);
         toolbarSubtitle.setText(new MArticlesPrefStore(this).getSourceName(sourceValue));
@@ -193,10 +194,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onRefresh() {
         QuoteSyncJob.syncImmediately(this);
-        if (!mSwipeRefresh.isRefreshing()){
+        if (!mSwipeRefresh.isRefreshing()) {
             mSwipeRefresh.setRefreshing(true);
         }
-        if (!networkUp() && mAdapter.getItemCount() == 0) {
+        if (!networkUp() && mAdapter.getItemCount() == 0 && mDataSet.size() == 0) {
             mSwipeRefresh.setRefreshing(false);
             noDataView.setVisibility(View.VISIBLE);
             Toast.makeText(this, R.string.toast_no_connectivity, Toast.LENGTH_LONG).show();
@@ -227,8 +228,9 @@ public class MainActivity extends AppCompatActivity
             mDataSet.addAll(Util.returnListFromCursor(data));
             mAdapter.notifyDataSetChanged();
 
-        }else {
-            noDataView.setVisibility(View.VISIBLE);
+        } else {
+            if (mDataSet.size() == 0)
+                noDataView.setVisibility(View.VISIBLE);
         }
     }
 

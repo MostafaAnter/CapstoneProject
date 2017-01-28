@@ -14,4 +14,5 @@ public class QuoteIntentService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         QuoteSyncJob.getQuotes(getApplicationContext());
     }
+
 }
