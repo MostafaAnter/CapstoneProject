@@ -2,6 +2,8 @@
 
 Description 
 
+<img style="position: center;" src="https://github.com/MostafaAnter/CapstoneProject/blob/master/art/output_RJH4vY.gif" width="250">
+
 The M-Articles app brings you the latest English articles reading experience on the go and keeps you informed on happenings from anywhere and around the World, greater personalisation and better overall performance. So you can get more of the articles that matters to you.
 
 Intended User
@@ -87,5 +89,8 @@ Google Ads by integrate the Firebase libraries with adMob id.
 
 ###Task 4: Create widget to display last news to user
 - Create collection widget that display list of news.
+
+
+you can find it on [Google Play!](https://goo.gl/khl4ad)
 
 
