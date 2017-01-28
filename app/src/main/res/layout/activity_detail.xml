@@ -29,7 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:background="@color/divider"/>
+                android:background="@color/divider"
+                android:transitionName="name"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"

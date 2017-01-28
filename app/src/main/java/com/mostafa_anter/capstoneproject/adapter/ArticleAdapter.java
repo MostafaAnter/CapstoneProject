@@ -1,5 +1,6 @@
 package com.mostafa_anter.capstoneproject.adapter;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.mostafa_anter.capstoneproject.R;
 import com.mostafa_anter.capstoneproject.R2;
 import com.mostafa_anter.capstoneproject.model.Article;
 import com.mostafa_anter.capstoneproject.ui.activity.DetailActivity;
+import com.mostafa_anter.capstoneproject.ui.activity.MainActivity;
 import com.mostafa_anter.capstoneproject.ui.views.DynamicHeightNetworkImageView;
 import com.mostafa_anter.capstoneproject.util.Util;
 
@@ -66,7 +68,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
                     Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
                     Intent intent = new Intent(mContext, DetailActivity.class);
                     intent.putExtra("item_data", mDataSet.get(getPosition()));
-                    mContext.startActivity(intent);
+
+                    View sharedView = thumbnail;
+                    String transitionName = "name";
+
+                    ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation((MainActivity) mContext, sharedView, transitionName);
+                    mContext.startActivity(intent, transitionActivityOptions.toBundle());
                 }
             });
         }
