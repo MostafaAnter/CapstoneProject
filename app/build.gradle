@@ -17,8 +17,8 @@ android {
         applicationId "com.mostafa_anter.capstoneproject"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 3
-        versionName "2.1"
+        versionCode 4
+        versionName "2.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.config
     }
